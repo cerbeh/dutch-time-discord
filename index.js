@@ -1,4 +1,5 @@
-const AMIR = 154241692680192001
+const AMIR = '154241692680192001'
+const CERB = '154314726577405953'
 const TOKEN = process.env.TOKEN
 
 const Discord = require('discord.js')
@@ -8,7 +9,7 @@ const client = new Discord.Client({
     Discord.IntentsBitField.Flags.GuildMembers,
     Discord.IntentsBitField.Flags.GuildMessages,
     Discord.IntentsBitField.Flags.MessageContent,
-
+    Discord.IntentsBitField.Flags.GuildVoiceStates,
   ]
 })
 
@@ -23,7 +24,7 @@ client.on('ready', async () => {
 client.on('messageCreate', message => console.log(`Received Message: ${JSON.stringify(message, null, 2)}`))
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-  if (!oldState.channelId && newState.channelId) {
+  if (newState.member.id === CERB && !oldState.channelId && newState.channelId) {
     console.log(`User ${newState.member.id} joined voice channel ${newState.channelId}`);
   }
 });
