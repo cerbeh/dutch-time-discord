@@ -21,7 +21,11 @@ client.on('ready', async () => {
   members.each(member => console.log(`User ${member.user.username} has ID ${member.id}`));
 });
 
-client.on('messageCreate', message => console.log(`Received Message: ${JSON.stringify(message, null, 2)}`))
+client.on('messageCreate', message => {
+  if (message.channelId === '154210023700955136') {
+    console.log(`Received Message: ${JSON.stringify(message, null, 2)}`)
+  }
+})
 
 client.on('voiceStateUpdate', (oldState, newState) => {
   if (newState.member.id === CERB && !oldState.channelId && newState.channelId) {
